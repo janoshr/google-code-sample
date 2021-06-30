@@ -43,3 +43,26 @@ class VideoLibrary:
             does not exist.
         """
         return self._videos.get(video_id, None)
+
+    def flag_video(self, video_id, flag_reason):
+        """Flag a video for the specified reason
+        
+        Args:
+            video_id: The video url.
+            flag_reason: The reason why the video is flagged
+        """
+        video = self.get_video(video_id)
+        if (video):
+            self._videos[video_id]._flagged = True
+            self._videos[video_id]._flag_reason = flag_reason
+
+    def unflag_video(self, video_id):
+        """Remove the flag from a video
+        
+        Args:
+            video_id: The video url.
+        """
+        video = self.get_video(video_id)
+        if (video):
+            self._videos[video_id]._flagged = False
+            self._videos[video_id]._flag_reason = None
